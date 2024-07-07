@@ -11,9 +11,11 @@ class DataManager:
             if city["iataCode"] == "":
                 id_params = {
                     "price": {
-                        "iataCode": FlightSearch().get_city_code(),
+                        "iataCode": FlightSearch().get_city_code(city_name=city["city"]),
                     }
                 }
+
                 id_endpoint = sheet_endpoint + "/" + str(city["id"])
                 response = requests.put(id_endpoint, json=id_params)
                 response.raise_for_status()
+
