@@ -1,6 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+import datetime
 
 
 class FlightSearch:
@@ -34,5 +35,17 @@ class FlightSearch:
         iata_code = response['data'][0]["iataCode"]
         return iata_code
 
-
+    def search_for_flight(self, iata_code):
+        flight_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
+        flight_params = {
+            "originLocationCode": "YYC",
+            "destinationLocationCode": iata_code,
+            "departureDate": datetime.date.today() + datetime.timedelta(days=1),
+            "returnDate": datetime.date.today() + datetime.timedelta(days=6 * 30),
+            "adults": 1,
+            "currencyCode": "CAD",
+            "max": 10
+        }
+        response = requests.get(url=flight_endpoint, params=flight_params, headers=self.header).json()
+        return response['data']
 
