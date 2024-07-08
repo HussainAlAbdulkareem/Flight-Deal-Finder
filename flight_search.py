@@ -2,6 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 import datetime
+from pprint import pprint
 
 
 class FlightSearch:
@@ -48,4 +49,5 @@ class FlightSearch:
         }
         response = requests.get(url=flight_endpoint, params=flight_params, headers=self.header).json()
         return response['data']
+
 

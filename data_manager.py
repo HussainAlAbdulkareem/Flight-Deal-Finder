@@ -2,6 +2,7 @@ import requests
 from flight_data import FlightData
 from flight_search import FlightSearch
 
+
 class DataManager:
     def add_iata_codes(self):
         sheet_data = FlightData().get_flight_data()
