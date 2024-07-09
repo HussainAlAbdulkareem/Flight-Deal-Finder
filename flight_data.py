@@ -25,5 +25,7 @@ class FlightData:
                 flight_info = flight
                 max_price = float(flight["price"]["grandTotal"])
 
+        if not flight_info:
+            return ("No flight data available.")
         return flight_info
 

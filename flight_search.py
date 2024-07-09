@@ -2,7 +2,6 @@ import os
 import requests
 from dotenv import load_dotenv
 import datetime
-from pprint import pprint
 
 
 class FlightSearch:
@@ -45,7 +44,8 @@ class FlightSearch:
             "returnDate": datetime.date.today() + datetime.timedelta(days=6 * 30),
             "adults": 1,
             "currencyCode": "CAD",
-            "max": 10
+            "max": 10,
+            "nonStop": "true"
         }
         response = requests.get(url=flight_endpoint, params=flight_params, headers=self.header).json()
         return response['data']

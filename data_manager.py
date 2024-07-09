@@ -4,11 +4,11 @@ from flight_search import FlightSearch
 
 
 class DataManager:
+    def __init__(self):
+        self.sheet_data = FlightData().get_flight_data()
+        self.sheet_endpoint = FlightData().sheets_endpoint
     def add_iata_codes(self):
-        sheet_data = FlightData().get_flight_data()
-        sheet_endpoint = FlightData().sheets_endpoint
-
-        for city in sheet_data["prices"]:
+        for city in self.sheet_data["prices"]:
             if city["iataCode"] == "":
                 id_params = {
                     "price": {
@@ -16,7 +16,9 @@ class DataManager:
                     }
                 }
 
-                id_endpoint = sheet_endpoint + "/" + str(city["id"])
+                id_endpoint = self.sheet_endpoint + "/" + str(city["id"])
                 response = requests.put(id_endpoint, json=id_params)
                 response.raise_for_status()
+
+
 
